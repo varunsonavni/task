@@ -8,6 +8,7 @@ on:
 env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}
   # KUBECONFIG: ${{ secrets.KUBECONFIG }}
 
 jobs:
@@ -21,13 +22,13 @@ jobs:
       - name: Build Docker image
         uses: docker/build-push-action@v2
         with:
-          context: ./backend-api
+          context: backend
           push: true
           tags: varun8487/task:${{ github.sha }}
-        env:
-          DOCKER_USERNAME: ${{ env.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ env.DOCKER_PASSWORD }}
-
+          registry: docker.io
+          username: ${{ env.DOCKER_USERNAME }}
+          password: ${{ env.DOCKER_PASSWORD }}
+          access-token: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
       # - name: Apply Kubernetes manifest
       #   uses: steebchen/kubectl@v1
