@@ -59,6 +59,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # Modify the deployment.yaml file to change the image tag
+      - name: Modify deployment.yaml
+        run: |
+          sed -i 's/image: varun8487\/task/image: varun8487\/task:${{ github.sha }}/g' kubernetes-manifest/deployment.yaml
+          # The above command replaces the image tag with the GitHub SHA in the deployment.yaml file
+
       # Apply the Kubernetes manifest to the cluster
       - name: Apply Kubernetes manifest
         uses: actions-hub/kubectl@master
