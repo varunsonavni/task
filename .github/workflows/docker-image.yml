@@ -9,7 +9,7 @@ env:
   DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
   DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}
-  KUBECONFIG: ${{ secrets.KUBECONFIG }}
+  # KUBECONFIG: ${{ secrets.KUBECONFIG }}
 
 jobs:
   build-and-push:
