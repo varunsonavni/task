@@ -1,3 +1,4 @@
+resource_group_name = "aks_terraform_rg"
 location = "East Us"
 cluster_name = "aks-terraform-cluster"
 kubernetes_version = "1.25.6"
