@@ -28,6 +28,7 @@ jobs:
           DOCKER_USERNAME: ${{ env.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ env.DOCKER_PASSWORD }}
 
+
       # - name: Apply Kubernetes manifest
       #   uses: steebchen/kubectl@v1
       #   with:
