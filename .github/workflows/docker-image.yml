@@ -1,0 +1,38 @@
+name: Deploy to AKS
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  REGISTRY_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+  REGISTRY_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+#   AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: varun8487/task:${{ github.sha }}
+          builder: ${{ env.REGISTRY_USERNAME }}/docker-buildx
+
+#       - name: Set up Azure CLI
+#         uses: azure/CLI@v1
+#         with:
+#           creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+#       - name: Apply Kubernetes manifest
+#         run: kubectl apply -f path/to/your/manifest.yaml
