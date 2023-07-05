@@ -33,7 +33,7 @@ jobs:
           tags: varun8487/task:${{ github.sha }}
 
       - name: Apply Kubernetes manifest
-        uses: steebchen/kubectl@v1
+        uses: actions-hub/kubectl@master
         with:
           args: apply -f k8s/deployment.yaml
         env:
