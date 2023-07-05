@@ -71,4 +71,4 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets.KUBECONFIG }}  # Set the KUBECONFIG environment variable to the path of the Kubernetes configuration file
         with:
-          args: rollout apply -f kubernetes-manifest/deployment.yaml  # Apply the Kubernetes manifest located at the specified path
+          args: apply -f kubernetes-manifest/deployment.yaml  # Apply the Kubernetes manifest located at the specified path
