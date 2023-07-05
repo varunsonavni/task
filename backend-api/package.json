@@ -1,5 +1,5 @@
 {
-    "name": "my-api",
+    "name": "demo-api",
     "version": "1.0.0",
    "description": "A simple CRUD API",
     "main": "server.js",
