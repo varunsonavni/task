@@ -41,7 +41,7 @@ jobs:
           push: true  # Push the Docker image to Docker Hub
           tags: |
 
-           varun8487/task:${{ github.sha }} # Set the tag name as github sha and push to DockerHub Registry.
+           varun8487/task:${{ github.sha }}
            varun8487/task:latest
            
   # Define the second job to deploy the Kubernetes manifest
