@@ -17,7 +17,7 @@ jobs:
   # Define the first job to build and push the Docker image
   build-and-push:
     # Set the type of machine to run the job on
-    runs-on: alpine-latest
+    runs-on: ubuntu-22.04
 
     # Define the steps to be executed in the job
     steps:
@@ -47,7 +47,7 @@ jobs:
   # Define the second job to deploy the Kubernetes manifest
   deploy-kubernetes:
     # Set the type of machine to run the job on
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     # Define the dependencies for the job
     needs: build-and-push
