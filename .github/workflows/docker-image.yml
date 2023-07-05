@@ -9,20 +9,12 @@ env:
   DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
   DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}
-  # KUBECONFIG: ${{ secrets.KUBECONFIG }}
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
 
     steps:
-    
-      - name: Apply Kubernetes manifest
-        uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
-        with:
-          args: get pods -A
 
       - name: Checkout code
         uses: actions/checkout@v2
@@ -39,4 +31,19 @@ jobs:
           context: backend-api
           push: true
           tags: varun8487/task:${{ github.sha }}
+
+
+  deploy-kubernetes:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Apply Kubernetes manifest
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
+        with:
+          args: apply -f deployment.yaml
+
 
