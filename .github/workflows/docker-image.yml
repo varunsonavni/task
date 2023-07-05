@@ -39,11 +39,14 @@ jobs:
 
     steps:
 
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Apply Kubernetes manifest
         uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
         with:
-          args: apply -f deployment.yaml
+          args: apply -f k8s/deployment.yaml
 
 
