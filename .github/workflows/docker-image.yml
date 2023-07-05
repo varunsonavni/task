@@ -39,8 +39,11 @@ jobs:
         with:
           context: backend-api  # Set the context for the Docker build to the backend-api directory
           push: true  # Push the Docker image to Docker Hub
-          tags: varun8487/task  # Set the name and tag for the Docker image
-
+          tags: |
+          # Set the name and tag for the Docker image
+           varun8487/task:${{ github.sha }}
+           varun8487/task:latest
+           
   # Define the second job to deploy the Kubernetes manifest
   deploy-kubernetes:
     # Set the type of machine to run the job on
