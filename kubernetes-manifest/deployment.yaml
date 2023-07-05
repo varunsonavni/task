@@ -1,38 +1,39 @@
 ---
+# Define a Deployment resource to manage the number of replicas of the API container
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api-demo
+  name: api-demo  # Set the name of the Deployment resource
 spec:
   selector:
     matchLabels:
-      app: api-demo
-  replicas: 2
+      app: api-demo  # Use the app label to select the pods managed by this Deployment
+  replicas: 2  # Set the desired number of replicas for the API container
   template:
     metadata:
       labels:
-        app: api-demo
+        app: api-demo  # Add the app label to the pod template
     spec:
       containers:
         - name: api-demo
-          image: varun8487/task
+          image: varun8487/task  # Set the Docker image to use for the API container
           ports:
-            - containerPort: 3000
+            - containerPort: 3000  # Expose port 3000 on the container
 
 ---
-
+# Define a Service resource to provide network access to the API container
 apiVersion: v1
 kind: Service
 metadata:
-  name: api-demo
+  name: api-demo  # Set the name of the Service resource
   labels:
-    app: api-demo
+    app: api-demo  # Add the app label to the Service resource
 spec:
-  type: LoadBalancer  # Add this line to make it a load balancer
+  type: LoadBalancer  # Set the Service type to LoadBalancer to expose the Service externally
   ports:
     - name: http
       port: 80
       protocol: TCP
-      targetPort: 3000
+      targetPort: 3000  # Map port 80 on the Service to port 3000 on the API container
   selector:
-    app: api-demo
+    app: api-demo  # Use the app label to select the pods managed by this Service
