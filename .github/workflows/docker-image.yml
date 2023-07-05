@@ -24,7 +24,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: ./backend-api/
           push: true
           tags: varun8487/task:${{ github.sha }}
           builder: ${{ env.REGISTRY_USERNAME }}/docker-buildx
