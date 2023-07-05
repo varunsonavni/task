@@ -16,13 +16,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    
+
       - name: Apply Kubernetes manifest
         uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
-        with:
-          args: get pods -A
+        run: |
+          kubectl apply -f k8s/deployment.yaml
 
       - name: Checkout code
         uses: actions/checkout@v2
